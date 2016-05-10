@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="tb_artistas")
+@XmlRootElement
 public class Artista implements Serializable{
 	
 	/**
@@ -32,13 +35,24 @@ public class Artista implements Serializable{
 	@Column(name="nacionalidade")
 	private String nacionalidade;
 
-	@OneToMany(mappedBy="artista")
+	@OneToMany(mappedBy="artista",cascade=CascadeType.ALL)
 	private List<Album> albuns;
 
 	
 	public Artista(){
 		super();
 	}
+
+	
+
+	public Artista(Integer codArtista, String nome, String nacionalidade, List<Album> albuns) {
+		super();
+		this.codArtista = codArtista;
+		this.nome = nome;
+		this.nacionalidade = nacionalidade;
+		this.albuns = albuns;
+	}
+
 
 
 	public Integer getCodArtista() {
@@ -90,7 +104,6 @@ public class Artista implements Serializable{
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,6 +120,4 @@ public class Artista implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

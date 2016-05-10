@@ -3,13 +3,13 @@ package facade.rs;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.jws.WebParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -35,7 +35,7 @@ public class MusicaFacadeImpl implements MusicaFacade{
 	@Override
 	@GET
 	@Path("/{codMusica}")
-	public List<Musica> getMusica(@WebParam(name="codigoMusica") Integer codMusica) {
+	public List<Musica> getMusica(@PathParam("codMusica") Integer codMusica) {
 		Musica musica = new Musica();
 		musica.setCodMusica(codMusica);;
 		return musicaDao.getMusica(musica);
@@ -43,20 +43,20 @@ public class MusicaFacadeImpl implements MusicaFacade{
 	
 	@Override
 	@POST 
-	public Musica salvar(@WebParam(name="musica") Musica musica) {
+	public Musica salvar(Musica musica) {
 		return musicaDao.salvar(musica);
 	}
 	
 	@Override
 	@PUT 
-	public void atualizar(@WebParam(name="Musica") Musica Musica) {
+	public void atualizar(Musica Musica) {
 		musicaDao.atualizar(Musica);
 	}
 	
 	@Override
 	@DELETE
 	@Path("/{codMusica}")
-	public void deletarMusica(@WebParam(name="codigoMusica") Integer codMusica) {
+	public void deletarMusica(@PathParam("codMusica") Integer codMusica) {
 		Musica Musica = new Musica();
 		Musica.setCodMusica(codMusica);
 		musicaDao.excluir(Musica);

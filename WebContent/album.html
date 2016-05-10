@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="albumModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Álbum</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="control/album.js"></script>
+</head>
+<body ng-controller="albumControl">
+	<div ng-include="'menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">Cadastro</div>
+		<div class="panel-body">
+			<div>
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active">
+			    	<a href="#album" aria-controls="album" role="tab" data-toggle="tab">Novo Album</a>
+			    </li>
+			    <li role="presentation">
+			    	<a href="#listar" aria-controls="listar" role="tab" data-toggle="tab">Listar Todos</a>
+			    </li>
+			  </ul>
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active" id="album">
+					<br>
+			    	<form>
+					  <div class="form-group col-md-2">
+					    <label for="exampleInputCodigo">Codigo</label>
+					    <input type="number" disabled="true" class="form-control" ng-model="album.codAlbum" placeholder="Codigo">
+					  </div>
+					  
+					  <div class="form-group col-md-6">
+					    <label for="exampleInputNome">Nome do Album</label>
+					    <input type="text" class="form-control" ng-model="album.nome" placeholder="Insira o Nome do Album">
+					  </div>
+					  
+					  <div class="form-group col-md-4">
+					    <label for="exampleInputAno">Ano de Lançamento</label>
+					    <input type="text" class="form-control" ng-model="album.ano" placeholder="Ano">
+					  </div>
+					  <label for="exampleInputArtista">Artista</label>
+					  <div class="form-group">
+					  	<select class="form-control"
+					  	ng-model="album.artista"
+					  	ng-options="artista.nome for artista in artistas track by artista.codArtista">					  		
+					  	</select>
+					  </div>
+					  <br><br><br><br><br><br>
+					  <button type="button" class="btn btn-info" ng-click="novo()">Novo</button>
+					  <button type="button" class="btn btn-success" ng-click="salvar();">Salvar</button>	
+					  <button type="button" class="btn btn-danger" ng-click="excluir();">Excluir</button>	
+					</form>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="listar">
+				<br>
+			    	<table class="table table-hover">
+			    		<th>Codigo</th><th>Nome do Album</th><th>Ano de Lançamento</th><th>Artista</th>
+
+			    		<tr ng-repeat="albumTabela in albuns | filter:criterio" ng-click="selecionaAlbum(albumTabela);">
+			    			<td>{{albumTabela.codAlbum}}</td>
+			    			<td>{{albumTabela.nome}}</td>
+			    			<td>{{albumTabela.ano}}</td>
+			    			<td>{{albumTabela.artista.nome}}</td>
+			    		</tr>
+					</table>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

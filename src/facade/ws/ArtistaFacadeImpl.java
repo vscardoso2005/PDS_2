@@ -24,7 +24,7 @@ public class ArtistaFacadeImpl implements ArtistaFacade {
 	}
 	
 	@WebMethod(operationName="getArtistaCodigo")
-	public List<Artista> getArtista(@WebParam(name="codigoArtista") Integer codArtista) {
+	public List<Artista> getArtista(@WebParam(name="getArtistaCodigo") Integer codArtista) {
 		Artista artista = new Artista();
 		artista.setCodArtista(codArtista);
 		return artistaDao.getArtista(artista);
@@ -41,7 +41,7 @@ public class ArtistaFacadeImpl implements ArtistaFacade {
 	}
 	
 	@WebMethod
-	public void deletarArtista(@WebParam(name="codigoArtista") Integer codArtista) {
+	public void deletarArtista(@WebParam(name="getArtistaCodigo") Integer codArtista) {
 		Artista artista = new Artista();
 		artista.setCodArtista(codArtista);
 		artistaDao.excluir(artista);

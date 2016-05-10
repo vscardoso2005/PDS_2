@@ -23,7 +23,7 @@ public class AlbumFacadeImpl implements AlbumFacade {
 	}
 	
 	@WebMethod(operationName="getAlbumCodigo")
-	public List<Album> getAlbum(@WebParam(name="codigoAlbum") Integer codAlbum) {
+	public List<Album> getAlbum(@WebParam(name="getAlbumCodigo") Integer codAlbum) {
 		Album album = new Album();
 		album.setCodAlbum(codAlbum);
 		return albumDao.getAlbum(album);
@@ -40,7 +40,7 @@ public class AlbumFacadeImpl implements AlbumFacade {
 	}
 	
 	@WebMethod
-	public void deletarAlbum(@WebParam(name="codigoAlbum") Integer codAlbum) {
+	public void deletarAlbum(@WebParam(name="getAlbumCodigo") Integer codAlbum) {
 		Album album = new Album();
 		album.setCodAlbum(codAlbum);
 		albumDao.excluir(album);

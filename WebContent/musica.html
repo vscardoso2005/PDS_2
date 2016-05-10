@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="musicaModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Música</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="control/musica.js"></script>
+</head>
+<body ng-controller="musicaControl">
+	<div ng-include="'menu.html'"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">Cadastro</div>
+		<div class="panel-body">
+			<div>
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active">
+			    	<a href="#musica" aria-controls="musica" role="tab" data-toggle="tab">Nova Música</a>
+			    </li>
+			    <li role="presentation">
+			    	<a href="#listar" aria-controls="listar" role="tab" data-toggle="tab">Listar Todos</a>
+			    </li>
+			  </ul>
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active" id="musica">
+					<br>
+			    	<form>
+					  <div class="form-group col-md-2">
+					    <label for="exampleInputCodigo">Codigo</label>
+					    <input type="number" disabled="true" class="form-control" ng-model="musica.codMusica" placeholder="Codigo">
+					  </div>
+					  
+					  <div class="form-group col-md-6">
+					    <label for="exampleInputNome">Nome da Música</label>
+					    <input type="text" class="form-control" ng-model="musica.nome" placeholder="Insira o Nome da Música">
+					  </div>
+					  
+					  <div class="form-group col-md-4">
+					    <label for="exampleInputDuracao">Duração</label>
+					    <input type="text" class="form-control" ng-model="musica.duracao" placeholder="Duração da Música">
+					  </div>
+					  <label for="exampleInputAlbum">Album</label>
+					  <div class="form-group">
+					  	<select class="form-control"
+					  	ng-model="musica.album"
+					  	ng-options="album.nome for album in albuns track by album.codAlbum">					  		
+					  	</select>
+					  </div>
+					  <br><br><br><br><br><br>
+					  <button type="button" class="btn btn-info" ng-click="novo()">Novo</button>
+					  <button type="button" class="btn btn-success" ng-click="salvar();">Salvar</button>	
+					  <button type="button" class="btn btn-danger" ng-click="excluir();">Excluir</button>	
+					</form>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="listar">
+				<br>
+			    	<table class="table table-hover">
+			    		<th>Codigo</th><th>Nome da Música</th><th>Duração</th><th>Album</th>
+
+			    		<tr ng-repeat="musicaTabela in musicas | filter:criterio" ng-click="selecionaMusica(musicaTabela);">
+			    			<td>{{musicaTabela.codMusica}}</td>
+			    			<td>{{musicaTabela.nome}}</td>
+			    			<td>{{musicaTabela.duracao}}</td>
+			    			<td>{{musicaTabela.album.nome}}</td>
+			    		</tr>
+					</table>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

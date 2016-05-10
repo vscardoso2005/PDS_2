@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="tb_albuns")
-
+@XmlRootElement
 public class Album implements Serializable{
 	
 	/**
@@ -39,12 +41,25 @@ public class Album implements Serializable{
 	@JoinColumn(name="artista")
 	private Artista artista;
 
-	@OneToMany(mappedBy="album")
+	@OneToMany(mappedBy="album",cascade=CascadeType.ALL)
 	private List<Musica> musicas;
 
 	public Album(){
 		super();
 	}
+	
+	
+
+	public Album(Integer codAlbum, String nome, Integer ano, Artista artista, List<Musica> musicas) {
+		super();
+		this.codAlbum = codAlbum;
+		this.nome = nome;
+		this.ano = ano;
+		this.artista = artista;
+		this.musicas = musicas;
+	}
+
+
 
 	public Integer getCodAlbum() {
 		return codAlbum;

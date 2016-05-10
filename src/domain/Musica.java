@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="tb_musicas")
+@XmlRootElement
 public class Musica implements Serializable{
 	
 	/**
@@ -37,6 +39,14 @@ public class Musica implements Serializable{
 	
 	public Musica(){
 		super();
+	}
+
+	public Musica(Integer codMusica, String nome, Integer duracao, Album album) {
+		super();
+		this.codMusica = codMusica;
+		this.nome = nome;
+		this.duracao = duracao;
+		this.album = album;
 	}
 
 	public Integer getCodMusica() {
